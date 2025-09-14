@@ -83,7 +83,7 @@ runs:
             [
               select(has("kind") and has("metadata"))
               | select(.kind=="Deployment" or .kind=="StatefulSet" or .kind=="DaemonSet" or .kind=="Job" or .kind=="CronJob")
-              | {kind: .kind, name: .metadata.name, namespace: (.metadata.namespace // "'"$NAMESPACE"'")}
+              | {"kind": .kind, "name": .metadata.name, "namespace": (.metadata.namespace // "'"$NAMESPACE"'")}
             ]' /tmp/kustomize-output.yaml
         )"
         WORKLOADS_JSON="$(echo "${WORKLOADS_JSON:-[]}" | tr -d '\n')"
